@@ -4,5 +4,5 @@ A web application for conducting polls at [Kasetsart University](http://www.ku.a
 
 ## Project Documents
 
--[Project Wiki](../../wiki/Home)
--[Vision Statement](../../wiki/Vision%20Statement)
+[Project Wiki](../../wiki/Home)
+[Vision Statement](../../wiki/Vision%20Statement)
