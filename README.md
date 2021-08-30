@@ -4,10 +4,10 @@ A web application for conducting polls at [Kasetsart University](http://www.ku.a
 
 ## Project Documents
 
-- [Project Wiki](../../wiki/Home) 
-- [Background](../../wiki/Background)   
-- [Vision Statement](../../wiki/Vision%20Statement)   
-- [Requirements](../../wiki/Requirements)
+[Project Wiki](../../wiki/Home) 
+[Background](../../wiki/Background)   
+[Vision Statement](../../wiki/Vision%20Statement)   
+[Requirements](../../wiki/Requirements)
 
 Iterations 
   - Iteration1
