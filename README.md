@@ -10,4 +10,4 @@ A web application for conducting polls at [Kasetsart University](http://www.ku.a
 [Requirements](../../wiki/Requirements)
 
 Iterations 
-  - [Iteration1](../../wiki/I)
+  - [Iteration1](../../wiki/Iteration%201%20plan)
