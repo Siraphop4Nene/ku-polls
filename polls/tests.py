@@ -9,21 +9,50 @@ from  .models import Question
 
 class QuestionModelTests(TestCase):
 
+    def test_is_published_true(self):
+        time = timezone.now() - datetime.timedelta(days= 2)
+        question = Question(pub_date=time)
+
+        self.assertIs(question.is_published(), True)
+
+    def test_is_published_false(self):
+        time = timezone.now() + datetime.timedelta(days= 20)
+        question = Question(pub_date=time)
+
+        self.assertIs(question.is_published(), False)
+
+    def test_can_vote_now(self):
+        time = timezone.now()
+        times = timezone.now() + datetime.timedelta(days= 2)
+        question = Question(pub_date=time, end_date = times)
+
+        self.assertIs(question.can_vote(), True)
+
+    def test_can_vote_now_end_date_pass(self):
+        time = timezone.now()
+        times = timezone.now() - datetime.timedelta(days= 2)
+        question = Question(pub_date=time, end_date = times)
+
+        self.assertIs(question.can_vote(), False)
+
     def test_was_published_recently_with_future_question(self):
         time = timezone.now() + datetime.timedelta(days = 30)
-        future_question = Question(pub_date = time)
+        times = timezone.now() + datetime.timedelta(days=365)
+        future_question = Question(pub_date = time, end_date = times)
 
         self.assertIs(future_question.was_published_recently(), False)
 
     def test_was_published_recently_with_old_question(self):
         time = timezone.now() - datetime.timedelta(days = 1, seconds= 1)
-        old_question = Question(pub_date = time)
+        times = timezone.now() + datetime.timedelta(days=365)
+        old_question = Question(pub_date = time, end_date = times)
 
         self.assertIs(old_question.was_published_recently(), False)
 
     def test_was_published_recently_with_recent_question(self):
         time = timezone.now() - datetime.timedelta(hours = 23, minutes = 59, seconds = 59)
-        recent_question = Question(pub_date = time)
+        times = timezone.now() + datetime.timedelta(days = 365)
+        recent_question = Question(pub_date = time, end_date = times)
 
         self.assertIs(recent_question.was_published_recently(), True)
 
