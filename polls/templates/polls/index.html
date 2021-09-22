@@ -5,7 +5,7 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
     {% endfor %}
 </ul>
 {% endif %}
@@ -14,10 +14,10 @@
     <ul>
     {% for question in latest_question_list %}
         {% if question.can_vote %}
-            <li><p>{{ question.question_text }} </p><a href="{% url 'polls:detail' question.id %}" ><button>vote</button></a></li>
+            <p>{{ question.question_text }} </p><a href="{% url 'polls:detail' question.id %}" ><button>vote</button></a>
             <a href="{% url 'polls:results' question.id %}"><button>results</button></a>
         {% else %}
-             <li><p>{{ question.question_text }} </p><a href="{% url 'polls:results' question.id %}" ><button>results</button></a></li>
+             <p>{{ question.question_text }} </p><a href="{% url 'polls:results' question.id %}" ><button>results</button></a>
         {% endif %}
     {% endfor %}
     </ul>
