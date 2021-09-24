@@ -63,7 +63,7 @@ def create_question(question_text, days):
     in the past, positive for questions that have yet to be published).
     """
     time = timezone.now() + datetime.timedelta(days = days)
-    return Question.objects.create(question_text = question_text, pub_date = time)
+    return Question.objects.create(question_text = question_text, pub_date = time, end_date = time + datetime.timedelta(days =10))
 
 class QuestionIndexViewTests(TestCase):
     def test_no_questions(self):
@@ -133,4 +133,15 @@ class QuestionDetailViewTests(TestCase):
         url = reverse('polls:detail', args = (past_question.id, ))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
+
+    def test_after_end_date(self):
+        """
+        this test when vote time is out. Check can vote or not.
+        """
+        end_question = create_question(question_text='End Question', days=-10)
+        url = reverse('polls:detail', args=(end_question.id,))
+        response = self.client.get(url)
+        self.assertRedirects(response, reverse('polls:index'), status_code=302,
+                             target_status_code=200)
+
 
