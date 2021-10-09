@@ -14,4 +14,4 @@ install:
 
 # script to run tests. Script can have many commands, one per line.
 script:
-  - python3 manage.py test
+  - python manage.py test
