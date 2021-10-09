@@ -1,0 +1,20 @@
+language: python
+
+# you can use Python 3.7 instead
+python: "3.8"
+
+# don't clone more than necessary
+git:
+  depth: 1
+
+install:
+  - pip install coverage
+  - pip install django
+  - pip install python-decouple
+# script to run tests. Script can have many commands, one per line.
+script:
+  - python manage.py makemigrations
+  - python manage.py migrate
+  - coverage run --source='.' manage.py test polls
+after_script:
+  - bash <(curl -s https://codecov.io/bash)
