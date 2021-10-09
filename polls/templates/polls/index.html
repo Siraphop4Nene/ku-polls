@@ -2,10 +2,23 @@
 
 <link rel="stylesheet" tpye="text/css" href="{% static 'polls/style.css' %}">
 
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+</ul>
+{% endif %}
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}" >{{ question.question_text }} </a></li>
+        {% if question.can_vote %}
+            <p>{{ question.question_text }} </p><a href="{% url 'polls:detail' question.id %}" ><button>vote</button></a>
+            <a href="{% url 'polls:results' question.id %}"><button>results</button></a>
+        {% else %}
+             <p>{{ question.question_text }} </p><a href="{% url 'polls:results' question.id %}" ><button>results</button></a>
+        {% endif %}
     {% endfor %}
     </ul>
 {% else %}
