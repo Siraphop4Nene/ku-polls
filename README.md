@@ -1,5 +1,6 @@
 # ku-polls
-
+[![Build Status](https://travis-ci.com/Siraphop4Nene/ku-polls.svg?branch=ci)](https://travis-ci.com/Siraphop4Nene/ku-polls) 
+[![codecov](https://codecov.io/gh/Siraphop4Nene/ku-polls/branch/ci/graph/badge.svg?token=I62CWDYVAK)](https://codecov.io/gh/Siraphop4Nene/ku-polls)   
 A web application for conducting polls at [Kasetsart University](http://www.ku.ac.th)
 
 ## Project Documents
