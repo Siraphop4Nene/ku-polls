@@ -1,12 +1,10 @@
 """Create view for ku-polls."""
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect
 from django.views import generic
-from django.urls import reverse
 from django.utils import timezone
 from django.contrib import messages
 
-from .models import Question, Choice
+from .models import Question, Choice, Vote
 
 
 class IndexView(generic.ListView):
@@ -60,7 +58,30 @@ def vote(request, question_id):
                        'error_message': "You didn't select a choice.",
                        })
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        return HttpResponseRedirect(reverse('polls:results',
-                                            args=(question.id,)))
+        user = request.user
+        user_vote = get_vote_for_user(user, question)
+
+        if user_vote is None:
+            # Create vote.
+            user_vote = Vote.objects.create(user=user, choice=selected_choice)
+        else:
+            # Modify existing vote.
+            user_vote.choice = selected_choice
+
+        user_vote.save()
+        return redirect('polls:results', question.id)
+
+
+def get_vote_for_user(user, question):
+    """
+    Find and return an existing vote for a user on a poll question.
+    Returns:
+        The user's vote or None if there are no votes for this question.
+    """
+    try:
+        votes = Vote.objects.filter(user=user).filter(choice__question=question)
+        if votes.count() == 0:
+            return None
+        return votes[0]
+    except Vote.DoesNotExist:
+        return None
