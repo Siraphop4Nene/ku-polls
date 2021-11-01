@@ -13,3 +13,12 @@ A web application for conducting polls at [Kasetsart University](http://www.ku.a
 Iterations 
   - Iteration1
   - Iteration2
+
+## Running KU Polls
+
+Users provided by the initial data (users.json):
+
+| Username  | Password    |
+|-----------|-------------|
+| demo1     | Vote4me!    |
+| demo2     | Vote4me2    |
