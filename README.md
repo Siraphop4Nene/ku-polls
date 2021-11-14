@@ -13,6 +13,7 @@ A web application for conducting polls at [Kasetsart University](http://www.ku.a
 Iterations 
   - Iteration1
   - Iteration2
+  - Iteration3
 
 ## Running KU Polls
 
